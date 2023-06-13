@@ -1,35 +1,40 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { Input, FormBtn } from "./Forma.styled"
+import { Input, FormBtn } from "./Forma.styled";
+import { useSelector } from 'react-redux';
+import { addContact } from 'redux/sliceContact';
+import { useDispatch } from 'recat-redux';
+import { nanoid } from 'nanoid';
 
-export const Forma = ({ arr, onSubmit }) => {
+export const Forma = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const contactsValue = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
 
-  const hendleSubmit = e => {
-    e.preventDefault();
-    const nameContacts = arr.map(el => el.name.toLowerCase());
+  const addContacts = (name, number) => {
+    const contact = {
+      id: nanoid(),
+      name,
+      number,
+    };
+    dispatch(addContact(contact));
+  };
+
+  const hendleSubmit = event => {
+    event.preventDefault();
+    const nameContacts = contactsValue.map(el => el.name.toLowerCase());
     if (nameContacts.includes(name.toLowerCase())) {
       alert(`${name} is in your contacts`);
     } else {
-      onSubmit(name, number);
+      addContacts(name, number);
       reset();
     }
   };
 
-  const hendleNameTelChange = e => {
-    const { name, value } = e.target;
-    switch (name) {
-      case 'name':
-        setName(value);
-        break;
-
-      case 'number':
-        setNumber(value);
-        break;
-      default:
-        break;
-    }
+  const hendleNameTelChange = event => {
+    const { name, value } = event.currentTarget;
+    if (name === 'name') setName(value);
+    if (name === 'number') setNumber(value);
   };
 
   const reset = () => {
@@ -41,6 +46,7 @@ export const Forma = ({ arr, onSubmit }) => {
     <>
       <form onSubmit={hendleSubmit}>
         <label>
+          Name
           <Input
             type="text"
             name="name"
@@ -54,6 +60,7 @@ export const Forma = ({ arr, onSubmit }) => {
         </label>
 
         <label>
+          Number
           <Input
             type="tel"
             name="number"
@@ -69,14 +76,4 @@ export const Forma = ({ arr, onSubmit }) => {
       </form>
     </>
   );
-};
-
-  Forma.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    arr: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string.isRequired,
-        number: PropTypes.string.isRequired,
-    })
-  )
 };
