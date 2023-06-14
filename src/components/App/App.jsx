@@ -1,7 +1,7 @@
 import { Contacts } from '../Contacts';
 import { Filter } from '../Filter';
 import { Forma } from '../Forma';
-import { ContainerForm } from "./App.styled"
+import { ContainerForm } from './App.styled';
 
 export const App = () => {
   return (
@@ -13,4 +13,4 @@ export const App = () => {
       <Contacts />
     </ContainerForm>
   );
-}
+};
