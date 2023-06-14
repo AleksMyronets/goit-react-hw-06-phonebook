@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Input, FormBtn } from "./Forma.styled";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { addContact } from 'redux/sliceContact';
-import { useDispatch } from 'recat-redux';
 import { nanoid } from 'nanoid';
 
 export const Forma = () => {

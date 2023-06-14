@@ -1,6 +1,6 @@
 import { InputFilter } from './Filter.styled';
 import { useSelector } from 'react-redux';
-import { addValue } from 'redux/sliceFilter';
+import { addValue } from '../../redux/sliseFilter';
 import { useDispatch } from 'react-redux';
 
 export const Filter = () => {
