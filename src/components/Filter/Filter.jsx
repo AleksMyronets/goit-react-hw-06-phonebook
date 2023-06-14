@@ -1,14 +1,14 @@
 import { InputFilter } from './Filter.styled';
 import { useSelector } from 'react-redux';
-import { addValue } from '../../redux/sliseFilter';
+import { setFilter } from '../../redux/sliseFilter';
 import { useDispatch } from 'react-redux';
 
 export const Filter = () => {
   const filterValue = useSelector(state => state.filter);
-  const dispatch = useDispatch;
+  const dispatch = useDispatch();
 
   const changeFilter = event => {
-    dispatch(addValue(event.currentTarget.value));
+    dispatch(setFilter(event.currentTarget.value));
   };
 
   return (
